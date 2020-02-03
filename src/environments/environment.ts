@@ -31,7 +31,8 @@ export const environment = {
   keycloak: {
     url: 'https://keycloak.mypoc.online:8081/auth',
     realm: 'TheLibrary',
-    clientId: 'thelibrary-app'
+    clientId: 'app-thelibrary'
+    // clientId: 'thelibrary-app'
   },
   baseUrl: {
     catalog: {
