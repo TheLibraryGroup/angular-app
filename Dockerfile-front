@@ -15,7 +15,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY build/front/package.json /app/package.json
 RUN npm install
-RUN npm install -g @angular/cli@7.3.7
+RUN npm install -g @angular/cli@8.3.24
 
 # add app
 COPY build/front/. /app
@@ -23,4 +23,4 @@ COPY build/front/. /app
 # start app
 RUN pwd
 RUN ls
-CMD ng serve --host 0.0.0.0
+CMD ng serve --proxy-config proxy.conf.json --host 0.0.0.0
