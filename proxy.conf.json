@@ -1,5 +1,5 @@
 {
     "/api/*": {
-        "target": "http://51.178.48.191:8090"
+        "target": "https://thelibrary.ms.catalog.mypoc.online:8090"
     }
 }

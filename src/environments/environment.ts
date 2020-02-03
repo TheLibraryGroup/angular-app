@@ -23,13 +23,13 @@ import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-ang
 // };
 
 export const baseUrls = {
-  catalog: 'http://51.178.48.191:8090/api'
+  catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
 };
 
 export const environment = {
   production: false,
   keycloak: {
-    url: 'https://www.keycloak.mypoc.online:8081/auth',
+    url: 'https://keycloak.mypoc.online:8081/auth',
     realm: 'TheLibrary',
     clientId: 'thelibrary-app'
   },
