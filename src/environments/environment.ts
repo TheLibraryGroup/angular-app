@@ -29,7 +29,7 @@ export const baseUrls = {
 export const environment = {
   production: false,
   keycloak: {
-    url: 'http://localhost:8080/auth',
+    url: 'https://www.keycloak.mypoc.online:8081/auth',
     realm: 'TheLibrary',
     clientId: 'thelibrary-app'
   },
