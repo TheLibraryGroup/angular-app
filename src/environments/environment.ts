@@ -23,7 +23,8 @@ import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-ang
 // };
 
 export const baseUrls = {
-  catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
+  // catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
+  catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
 };
 
 export const environment = {
