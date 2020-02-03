@@ -29,7 +29,8 @@ export const baseUrls = {
 export const environment = {
   production: false,
   keycloak: {
-    url: 'https://keycloak.mypoc.online:8081/auth',
+    // url: 'https://keycloak.mypoc.online:8081/auth',
+    url: 'https://keycloak.mypoc.online/auth',
     realm: 'TheLibrary',
     clientId: 'app-thelibrary'
     // clientId: 'thelibrary-app'
