@@ -23,7 +23,7 @@ import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-ang
 // };
 
 export const baseUrls = {
-  catalog: 'http://localhost:8090/api'
+  catalog: 'http://51.178.48.191:8090/api'
 };
 
 export const environment = {
