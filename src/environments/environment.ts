@@ -32,7 +32,8 @@ export const environment = {
   keycloak: {
     // url: 'https://keycloak.mypoc.online:8081/auth',
     url: 'https://keycloak.mypoc.online/auth',
-    realm: 'TheLibrary',
+    // realm: 'TheLibrary',
+    realm: 'Thelibrary',
     clientId: 'app-thelibrary'
     // clientId: 'thelibrary-app'
   },
