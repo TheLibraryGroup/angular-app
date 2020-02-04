@@ -4,7 +4,8 @@ import {BooksComponent} from './shared/books/books.component';
 import {AppAuthGuard} from './app-auth.guard';
 
 const routes: Routes = [
-  { path: 'books', component: BooksComponent,
+  {
+    path: 'books', component: BooksComponent,
     // canActivate: [AppAuthGuard],
     // data: { roles: ['user'] }
   },
@@ -24,9 +25,14 @@ const routes: Routes = [
     canActivate: [AppAuthGuard],
     data: { roles: ['user'] }
   },
-  { path: '', redirectTo: '/books',
-    pathMatch: 'full' },
-  { path: '**', redirectTo: '/' }
+  {
+    path: '', redirectTo: '/books',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  }
 ];
 
 @NgModule({
