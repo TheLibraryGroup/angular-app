@@ -23,4 +23,4 @@ COPY build/front/. /app
 # start app
 RUN pwd
 RUN ls
-CMD ng serve --proxy-config proxy.conf.json --host 127.0.0.1 --public-host 'https://www.thelibrary.mypoc.online'
+CMD ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --public-host 'https://www.thelibrary.mypoc.online'
