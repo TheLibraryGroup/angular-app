@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {ApplicationRef, DoBootstrap, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ApplicationRef, DoBootstrap, NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import {environment} from '../environments/environment';
 import {HttpErrorInterceptor} from './shared/http-error.interceptor';
 import {HeaderComponent} from './shared/header/header.component';
 import {SideNavComponent} from './shared/side-nav/side-nav.component';
+import {initializer} from './app.init';
 
 const keycloakService = new KeycloakService();
 
@@ -31,24 +32,24 @@ const keycloakService = new KeycloakService();
     KeycloakAngularModule
   ],
   providers: [
-    {
-      provide: KeycloakService,
-      useValue: keycloakService
-    },
-    // { provide: APP_INITIALIZER,
-    //   useFactory: initializer,
-    //   multi: true,
-    //   deps: [KeycloakService]
+    // {
+    //   provide: KeycloakService,
+    //   useValue: keycloakService
     // },
+    { provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    },
     { provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
     }
   ],
   entryComponents: [AppComponent],
-  // bootstrap: [AppComponent]
+  bootstrap: [AppComponent]
 })
-export class AppModule implements DoBootstrap {
+export class AppModule /*implements DoBootstrap*/ {
   ngDoBootstrap(appRef: ApplicationRef) {
     keycloakService
       .init({

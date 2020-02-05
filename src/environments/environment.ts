@@ -34,10 +34,10 @@ export const environment = {
     // url: 'https://keycloak.mypoc.online:8081/auth',
     // url: 'https://keycloak.mypoc.online/auth',
     url: 'https://auth.thelibrary.mypoc.online/auth',
-    // realm: 'TheLibrary',
-    realm: 'thelibrary',
-    clientId: 'app-thelibrary'
-    // clientId: 'thelibrary-app'
+    // realm: 'thelibrary',
+    // clientId: 'app-thelibrary',
+    realm: 'TheLibrary',
+    clientId: 'thelibrary-app'
   },
   baseUrl: {
     catalog: {
