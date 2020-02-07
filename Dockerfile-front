@@ -19,8 +19,12 @@ RUN npm install -g @angular/cli@8.3.24
 
 # add app
 COPY build/front/. /app
+COPY /etc/letsencrypt/live/jenkins.mypoc.online/fullchain.pem /ssl/fullchain.pem
+COPY /etc/letsencrypt/live/jenkins.mypoc.online/privkey.pem /ssl/privkey.pem
 
 # start app
 RUN pwd
 RUN ls
-CMD ng serve --configuration=production --proxy-config proxy.conf.json --host 0.0.0.0 --public-host 'https://www.thelibrary.mypoc.online'
+#CMD ng serve --configuration=production --proxy-config proxy.conf.json --host 0.0.0.0 --public-host 'https://www.thelibrary.mypoc.online'
+
+CMD ng serve --ssl=true --ssl-cert "/ssl/fullchain.pem" --ssl-key "/ssl/privkey.pem"
