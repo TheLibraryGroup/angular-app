@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BooksComponent} from './shared/books/books.component';
-import {AppAuthGuard} from './app-auth.guard';
+// import {AppAuthGuard} from './app-auth.guard';
+import {TheLibraryGuard} from './the-library-guard';
 
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    // canActivate: [AppAuthGuard],
+    canActivate: [TheLibraryGuard],
     // data: { roles: ['user'] }
   },
   {
@@ -22,17 +23,17 @@ const routes: Routes = [
   {
     path: 'loan',
     loadChildren: () => import('./loan/loan.module').then(mod => mod.LoanModule),
-    canActivate: [AppAuthGuard],
-    data: { roles: ['user'] }
+    // canActivate: [AppAuthGuard],
+    // data: { roles: ['user'] }
   },
-  {
-    path: '', redirectTo: '/books',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    redirectTo: '/'
-  }
+  // {
+  //   path: '', redirectTo: '/books',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/'
+  // }
 ];
 
 @NgModule({

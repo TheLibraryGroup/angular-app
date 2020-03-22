@@ -1,2 +1,8 @@
 <p>books works!</p>
+<div class="example-container">
+  <button mat-button (click)="onClickBook(1)">Test public REST endpoint!</button>
+</div>
+<div *ngIf="book">
+  {{book | json}}
+</div>
 {{bookList | json}}
