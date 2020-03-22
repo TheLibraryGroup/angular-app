@@ -12,12 +12,12 @@ import {OAuthService} from 'angular-oauth2-oidc';
 })
 export class BookService {
 
-  urlGetBooks = environment.baseUrl.catalog.getBooks;
-
-  // constructor(private httpClient: HttpClient) { }
-
-  public backendServiceApiUrl =
-    environment.baseUrl.catalog.getBooks;
+  // urlGetBooks = environment.baseUrl.catalog.getBooks;
+  //
+  // // constructor(private httpClient: HttpClient) { }
+  //
+  // public backendServiceApiUrl =
+  //   environment.baseUrl.catalog.getBooks;
 
   constructor(private httpClient: HttpClient,
               private oauthService: OAuthService/*,

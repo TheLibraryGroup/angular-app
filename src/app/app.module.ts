@@ -16,6 +16,7 @@ import {SideNavComponent} from './shared/side-nav/side-nav.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import {TheLibraryGuard} from './the-library-guard';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {AuthConfigModule} from './auth/auth-config.module';
 
 // const keycloakService = new KeycloakService();
 
@@ -32,12 +33,13 @@ import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/mate
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    OAuthModule.forRoot({
-      resourceServer: {
-        allowedUrls: ['http://localhost:8081'],
-        sendAccessToken: true
-      }
-    }),
+    // OAuthModule.forRoot({
+    //   resourceServer: {
+    //     allowedUrls: ['http://localhost:8081'],
+    //     sendAccessToken: true
+    //   }
+    // }),
+    AuthConfigModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
