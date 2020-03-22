@@ -1,2 +1,9 @@
 <p>books works!</p>
+
+<button mat-button (click)="onClickBook()">Try public REST uri getBookById( 1 )!</button>
+
+<div *ngIf="book">
+  {{book | json}}
+</div>
+
 {{bookList | json}}

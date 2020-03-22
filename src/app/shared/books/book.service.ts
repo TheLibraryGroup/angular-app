@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators';
 export class BookService {
 
   urlGetBooks = environment.baseUrl.catalog.getBooks;
+  urlGetBookById = environment.baseUrl.catalog.getBookById;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,5 +19,11 @@ export class BookService {
     console.log('Class: BookService, Function: getBooks, Line 18 this.urlGetBooks(): '
     , this.urlGetBooks);
     return this.httpClient.get<Book[]>(this.urlGetBooks).pipe(map( httpResponse => httpResponse));
+  }
+
+  getBookById(id: number): Observable<Book> {
+    console.log('Class: BookService, Function: getBooks, Line 18 this.urlGetBooks(): '
+      , this.urlGetBooks);
+    return this.httpClient.get<Book>(this.urlGetBookById + '/' + id).pipe(map( httpResponse => httpResponse));
   }
 }

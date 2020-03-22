@@ -12,15 +12,32 @@ export class BooksComponent implements OnInit {
 
   bookList: Book[];
 
-  constructor(public bookService: BookService) { }
+  book: Book;
+
+  constructor(public bookService: BookService, private keycloakService: KeycloakService) { }
 
   ngOnInit() {
 
-    this.bookService.getBooks().subscribe(httpResponse => {
+    try {
+      const userDetails = this.keycloakService.getKeycloakInstance().tokenParsed['userDetails'];
+    } catch (e) {
+      console.log('Failed to load user details', e);
+    }
+
+    this.bookService.getBooks().subscribe((httpResponse: Book[]) => {
       this.bookList = httpResponse;
     }, error => {
       console.log('Class: BooksComponent, Function: bookService.getBooks(), Line 20 error(): '
       , error);
+    });
+  }
+
+  onClickBook() {
+    this.bookService.getBookById(1).subscribe((httpResponse: Book) => {
+      this.book = httpResponse;
+    }, error => {
+      console.log('Class: BooksComponent, Function: bookService.getBooks(), Line 20 error(): '
+        , error);
     });
   }
 

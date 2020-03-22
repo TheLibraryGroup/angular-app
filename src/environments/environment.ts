@@ -1,21 +1,27 @@
 export const baseUrls = {
   // catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
-  catalog: 'http://localhost:8090/api'
+  // catalog: 'http://localhost:8090/api'
+  catalog: 'http://localhost:8081/THELIBRARY-MS-BOOK/api'
 };
 
 export const environment = {
   production: false,
-  authServiceApiUrl: 'http://localhost:8080/auth',
+  authServiceApiUrl: 'https://www.auth.thelibrary.mypoc.online/auth',
   keycloak: {
-    url: 'http://localhost:8080/auth',
+    url: 'https://www.auth.thelibrary.mypoc.online/auth',
     // realm: 'thelibrary',
     // clientId: 'app-thelibrary',
     realm: 'TheLibrary',
-    clientId: 'thelibrary-app'
+    clientId: 'thelibrary-app',
+    credentials: {
+      secret: '5902eff4-0127-440d-92d5-f0c0682ff4d7'
+    }
   },
   baseUrl: {
     catalog: {
-      getBooks: baseUrls.catalog + '/books'
+      getBooks: baseUrls.catalog + '/books',
+      getBookById: baseUrls.catalog + '/book',
+
     }
   }
 };

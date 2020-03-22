@@ -13,6 +13,7 @@ import {HttpErrorInterceptor} from './shared/http-error.interceptor';
 import {HeaderComponent} from './shared/header/header.component';
 import {SideNavComponent} from './shared/side-nav/side-nav.component';
 import {initializer} from './app.init';
+import {MatButtonModule} from '@angular/material';
 
 const keycloakService = new KeycloakService();
 
@@ -29,7 +30,8 @@ const keycloakService = new KeycloakService();
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    MatButtonModule
   ],
   providers: [
     // {

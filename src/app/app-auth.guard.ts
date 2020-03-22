@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
 import {KeycloakAuthGuard, KeycloakService} from 'keycloak-angular';
 
 @Injectable({
@@ -12,34 +12,63 @@ export class AppAuthGuard extends KeycloakAuthGuard {
       super(router, keycloakAngular);
     }
 
-  isAccessAllowed(route: ActivatedRouteSnapshot): Promise<boolean> {
+  // isAccessAllowed(route: ActivatedRouteSnapshot): Promise<boolean> {
+  //   return new Promise(async (resolve, reject) => {
+  //     const requiredRoles = route.data.roles;
+  //
+  //     console.log('Class: AppAuthGuard, Function: , Line 19 (): '
+  //     , route);
+  //
+  //     if (route.url[0].path === '/books') {
+  //       return resolve(true);
+  //     } else if (!this.authenticated ) {
+  //       this.keycloakAngular.login();
+  //       return resolve(true);
+  //     }
+  //     if (!requiredRoles || requiredRoles.length === 0) {
+  //       return resolve(true);
+  //     } else {
+  //       if (!this.roles || this.roles.length === 0) {
+  //         resolve(false);
+  //       }
+  //       let granted = false;
+  //       for (const requiredRole of requiredRoles) {
+  //         if (this.roles.indexOf(requiredRole) > -1) {
+  //           granted = true;
+  //           break;
+  //         }
+  //       }
+  //       resolve(granted);
+  //     }
+  //   });
+  // }
+
+  isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
-      const requiredRoles = route.data.roles;
-
-      console.log('Class: AppAuthGuard, Function: , Line 19 (): '
-      , route);
-
-      if (route.url[0].path === '/books') {
-        return resolve(true);
-      } else if (!this.authenticated ) {
+      if (!this.authenticated) {
         this.keycloakAngular.login();
-        return resolve(true);
+        return;
       }
+      console.log('role restriction given at app-routing.module for this route', route.data.roles);
+      console.log('User roles coming after login from keycloak :', this.roles);
+      const requiredRoles = route.data.roles;
+      let granted = false;
       if (!requiredRoles || requiredRoles.length === 0) {
-        return resolve(true);
+        granted = true;
       } else {
-        if (!this.roles || this.roles.length === 0) {
-          resolve(false);
-        }
-        let granted = false;
         for (const requiredRole of requiredRoles) {
           if (this.roles.indexOf(requiredRole) > -1) {
             granted = true;
             break;
           }
         }
-        resolve(granted);
       }
+
+      if (granted === false) {
+        this.router.navigate(['/']);
+      }
+      resolve(granted);
+
     });
   }
 }

@@ -6,8 +6,10 @@ import {AppAuthGuard} from './app-auth.guard';
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    // canActivate: [AppAuthGuard],
-    // data: { roles: ['user'] }
+    canActivate: [AppAuthGuard],
+    data: {
+      roles: ['admin', 'user'],
+    },
   },
   {
     path: 'search',
@@ -22,17 +24,17 @@ const routes: Routes = [
   {
     path: 'loan',
     loadChildren: () => import('./loan/loan.module').then(mod => mod.LoanModule),
-    canActivate: [AppAuthGuard],
-    data: { roles: ['user'] }
+    // canActivate: [AppAuthGuard],
+    // data: { roles: ['user'] }
   },
-  {
-    path: '', redirectTo: '/books',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    redirectTo: '/'
-  }
+  // {
+  //   path: '', redirectTo: '/books',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/'
+  // }
 ];
 
 @NgModule({
