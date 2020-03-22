@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {AuthConfig, NullValidationHandler, OAuthService} from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-root',
@@ -9,32 +8,5 @@ import {AuthConfig, NullValidationHandler, OAuthService} from 'angular-oauth2-oi
 export class AppComponent {
   title = 'TheLibrary-Angular';
 
-  constructor(private oauthService: OAuthService) {
-    this.configure();
-  }
 
-  authConfig: AuthConfig = {
-    issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
-    redirectUri: window.location.origin + '',
-    clientId: 'thelibrary-app',
-    scope: 'openid profile email offline_access thelibrary',
-    responseType: 'code',
-    // at_hash is not present in JWT token
-    disableAtHashCheck: true,
-    showDebugInformation: true
-  };
-
-  public login() {
-    this.oauthService.initLoginFlow();
-  }
-
-  public logoff() {
-    this.oauthService.logOut();
-  }
-
-  private configure() {
-    this.oauthService.configure(this.authConfig);
-    this.oauthService.tokenValidationHandler = new NullValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
-  }
 }
