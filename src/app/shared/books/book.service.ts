@@ -18,7 +18,8 @@ export class BookService {
   }
 
   getBooks(): Observable<Book[]> {
-    const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/books';
+    // const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/books';
+    const url = 'http://localhost:8081/api/books';
     const urlNoGateway = 'http://localhost:8090/api/books';
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json');
@@ -30,7 +31,7 @@ export class BookService {
     // headers.set('Accept', 'text/json');
     // headers.set('Authorization', 'Bearer ' + this.keycloakService.getToken());
 
-    return this.httpClient.get<Book[]>(urlNoGateway, {headers}).pipe(map(httpResponse => httpResponse));
+    return this.httpClient.get<Book[]>(url, {headers}).pipe(map(httpResponse => httpResponse));
   }
 
   public getBooksById(id: number): Observable<Book> {

@@ -13,22 +13,10 @@ import {HeaderComponent} from './shared/header/header.component';
 import {SideNavComponent} from './shared/side-nav/side-nav.component';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {initializer} from './keycloak-init';
+import {AuthenticationService} from './auth/authentication.service';
 
 
-export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
-  return (): Promise<any> => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        await keycloak.init(environment.keycloakOptions);
-        console.log('Keycloak is initialized');
-        resolve();
-      } catch (error) {
-        console.log('Error thrown in init ' + error);
-        reject(error);
-      }
-    });
-  };
-}
 
 @NgModule({
   declarations: [
@@ -49,17 +37,15 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     KeycloakAngularModule,
   ],
   providers: [
-    // {
-    //   provide: KeycloakService,
-    //   useValue: keycloakService
-    // },
-    // { provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpErrorInterceptor,
-    //   multi: true
-    // },
-    { provide: APP_INITIALIZER, useFactory: kcInitializer, multi: true, deps: [KeycloakService] },
+    AuthenticationService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializer,
+      multi: true,
+      deps: [KeycloakService]
+    }
+
   ],
-  entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule /*implements DoBootstrap*/ {
