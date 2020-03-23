@@ -1,15 +1,14 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BooksComponent} from './shared/books/books.component';
-import {AppAuthGuard} from './app-auth.guard';
 
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    canActivate: [AppAuthGuard],
-    data: {
-      roles: ['admin', 'user'],
-    },
+    // canActivate: [AppAuthGuard],
+    // data: {
+    //   roles: ['admin', 'user'],
+    // },
   },
   {
     path: 'search',

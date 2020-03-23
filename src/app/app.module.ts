@@ -7,15 +7,19 @@ import {AppRoutingModule} from './app-routing.module';
 import {BooksComponent} from './shared/books/books.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {environment} from '../environments/environment';
 import {HttpErrorInterceptor} from './shared/http-error.interceptor';
 import {HeaderComponent} from './shared/header/header.component';
 import {SideNavComponent} from './shared/side-nav/side-nav.component';
-import {initializer} from './app.init';
 import {MatButtonModule} from '@angular/material';
+import {KeycloakSecurityService} from './auth/keycloak-security.service';
 
-const keycloakService = new KeycloakService();
+// const keycloakService = new KeycloakService();
+
+export function kcFactory(kcSecurity: KeycloakSecurityService) {
+  return () => kcSecurity.init();
+
+}
 
 @NgModule({
   declarations: [
@@ -30,44 +34,44 @@ const keycloakService = new KeycloakService();
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    KeycloakAngularModule,
+    // KeycloakAngularModule,
     MatButtonModule
   ],
   providers: [
-    {
-      provide: KeycloakService,
-      useValue: keycloakService
-    },
+    // {
+    //   provide: KeycloakService,
+    //   useValue: keycloakService
+    // },
     { provide: APP_INITIALIZER,
-      useFactory: initializer,
+      useFactory: kcFactory,
       multi: true,
-      deps: [KeycloakService]
+      deps: [KeycloakSecurityService]
     },
-    { provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
-    }
+    // { provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpErrorInterceptor,
+    //   multi: true
+    // }
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule /*implements DoBootstrap*/ {
 
-  ngDoBootstrap(appRef: ApplicationRef) {
-    keycloakService
-      .init({
-        config: environment.keycloak,
-        initOptions: {
-          // onLoad: 'login-required',
-          checkLoginIframe: false
-        },
-        enableBearerInterceptor: true,
-        bearerExcludedUrls: []
-      })
-      .then(() => {
-        console.log('[ngDoBootstrap] bootstrap app');
-        appRef.bootstrap(AppComponent);
-      })
-      .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
-  }
+  // ngDoBootstrap(appRef: ApplicationRef) {
+  //   keycloakService
+  //     .init({
+  //       config: environment.keycloak,
+  //       initOptions: {
+  //         // onLoad: 'login-required',
+  //         checkLoginIframe: false
+  //       },
+  //       enableBearerInterceptor: true,
+  //       bearerExcludedUrls: []
+  //     })
+  //     .then(() => {
+  //       console.log('[ngDoBootstrap] bootstrap app');
+  //       appRef.bootstrap(AppComponent);
+  //     })
+  //     .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
+  // }
 }

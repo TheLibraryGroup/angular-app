@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../../model/book';
 import {BookService} from './book.service';
-import {KeycloakService} from 'keycloak-angular';
+// import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-books',
@@ -14,15 +14,15 @@ export class BooksComponent implements OnInit {
 
   book: Book;
 
-  constructor(public bookService: BookService, public keycloakService: KeycloakService) { }
+  constructor(public bookService: BookService) { }
 
   ngOnInit() {
 
-    try {
-      const userDetails = this.keycloakService.getKeycloakInstance().tokenParsed['userDetails'];
-    } catch (e) {
-      console.log('Failed to load user details', e);
-    }
+    // try {
+    //   const userDetails = this.keycloakService.getKeycloakInstance().tokenParsed['userDetails'];
+    // } catch (e) {
+    //   console.log('Failed to load user details', e);
+    // }
 
     this.bookService.getBooks().subscribe((httpResponse: Book[]) => {
       this.bookList = httpResponse;

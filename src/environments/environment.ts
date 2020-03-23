@@ -1,7 +1,7 @@
 export const baseUrls = {
   // catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
   // catalog: 'http://localhost:8090/api'
-  catalog: 'http://localhost:8081/THELIBRARY-MS-BOOK/api'
+  book: 'http://localhost:8081/api'
 };
 
 export const environment = {
@@ -16,9 +16,9 @@ export const environment = {
     }
   },
   baseUrl: {
-    catalog: {
-      getBooks: baseUrls.catalog + '/books',
-      getBookById: baseUrls.catalog + '/book',
+    book: {
+      getBooks: baseUrls.book + '/books',
+      getBookById: baseUrls.book + '/book',
 
     }
   }

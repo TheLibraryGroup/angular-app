@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {KeycloakSecurityService} from './auth/keycloak-security.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,7 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'TheLibrary-Angular';
 
+
+  constructor(public keycloakSecurityServcie: KeycloakSecurityService) {
+  }
 }

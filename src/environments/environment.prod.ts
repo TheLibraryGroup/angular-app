@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 // Add here your keycloak configuration information
-import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-angular';
+// import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-angular';
 
 // const keycloakConfig: KeycloakConfig = {
 //   url: 'http://localhost:8080/auth',
@@ -24,7 +24,7 @@ import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-ang
 
 export const baseUrls = {
   // catalog: 'https://thelibrary.ms.catalog.mypoc.online:8090/api'
-  catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
+  book: 'https://thelibrary.ms.catalog.mypoc.online/api'
 };
 
 export const environment = {
@@ -40,7 +40,7 @@ export const environment = {
     clientId: 'thelibrary-app'
   },
   baseUrl: {
-    catalog: {
+    book: {
       getBooks: baseUrls.catalog + '/books'
     }
   }
