@@ -20,7 +20,9 @@ export class BookService {
   getBooks(): Observable<Book[]> {
     const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/books';
     const urlNoGateway = 'http://localhost:8090/api/books';
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json');
+    headers.set('Authorization', 'Bearer ' + this.keycloakService.getKeycloakInstance().token );
 
     console.log('Class: BookService, Function: getBooks, Line 18 this.urlGetBooks(): '
       , baseUrls);

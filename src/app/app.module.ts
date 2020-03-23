@@ -53,10 +53,10 @@ export function kcInitializer(keycloak: KeycloakService): () => Promise<any> {
     //   provide: KeycloakService,
     //   useValue: keycloakService
     // },
-    { provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
-      multi: true
-    },
+    // { provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpErrorInterceptor,
+    //   multi: true
+    // },
     { provide: APP_INITIALIZER, useFactory: kcInitializer, multi: true, deps: [KeycloakService] },
   ],
   entryComponents: [AppComponent],

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
     canActivate: [AppAuthGuard],
-    data: { roles: ['user'] }
+    data: { roles: ['user', 'admin'] }
   },
   {
     path: 'search',

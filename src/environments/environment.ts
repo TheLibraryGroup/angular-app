@@ -8,9 +8,12 @@ import {KeycloakConfig, KeycloakInitOptions, KeycloakOptions} from 'keycloak-ang
 
 // Add here your keycloak configuration information
 const keycloakConfig: KeycloakConfig = {
-  url: 'https://auth.thelibrary.mypoc.online/auth',
+  url: 'https://www.auth.thelibrary.mypoc.online/auth',
   realm: 'TheLibrary',
-  clientId: 'thelibrary-app'
+  clientId: 'thelibrary-app',
+  credentials: {
+    secret: '5902eff4-0127-440d-92d5-f0c0682ff4d7'
+  }
 };
 
 const keycloakInitOptions: KeycloakInitOptions = {
