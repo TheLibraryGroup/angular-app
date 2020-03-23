@@ -30,7 +30,8 @@ export class BookService {
   // }
 
   public getBooks(): Observable<Book[]>  {
-    const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/books';
+    // const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/books';
+    const url = 'http://localhost:8081/api/books';
     const urlNoGateway = 'http://localhost:8090/api/books';
 
     const headers = new HttpHeaders({
@@ -38,18 +39,19 @@ export class BookService {
     headers.set('Accept', 'text/json');
     headers.set('Authorization', 'Bearer ' + this.oauthService.getAccessToken());
 
-    return this.httpClient.get<Book[]>(urlNoGateway, {headers} ).pipe(map(httpResponse => httpResponse));
+    return this.httpClient.get<Book[]>(url, {headers} ).pipe(map(httpResponse => httpResponse));
   }
 
   public getBooksById(id: number): Observable<Book>  {
-    const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/book/' + id;
+    // const url = 'http://localhost:8081/THELIBRARY-MS-BOOK/api/book/' + id;
+    const url = 'http://localhost:8081/api/book/' + id;
     const urlNoGateway = 'http://localhost:8090/api/book/' + id;
 
     const headers = new HttpHeaders();
     headers.set('Accept', 'text/json');
     headers.set('Authorization', 'Bearer ' + this.oauthService.getAccessToken());
 
-    return this.httpClient.get<Book>(urlNoGateway, {headers} ).pipe(map(httpResponse => httpResponse));
+    return this.httpClient.get<Book>(url, {headers} ).pipe(map(httpResponse => httpResponse));
   }
 
   // async upload(formData: FormData): Promise<any> {

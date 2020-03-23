@@ -17,6 +17,7 @@ export class AppComponent {
     issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
     redirectUri: window.location.origin + '',
     clientId: 'thelibrary-app',
+    dummyClientSecret: '5902eff4-0127-440d-92d5-f0c0682ff4d7',
     scope: 'openid profile email offline_access thelibrary',
     responseType: 'code',
     // at_hash is not present in JWT token
