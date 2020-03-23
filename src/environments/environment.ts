@@ -9,8 +9,6 @@ export const environment = {
   authServiceApiUrl: 'https://www.auth.thelibrary.mypoc.online/auth',
   keycloak: {
     url: 'https://www.auth.thelibrary.mypoc.online/auth',
-    // realm: 'thelibrary',
-    // clientId: 'app-thelibrary',
     realm: 'TheLibrary',
     clientId: 'thelibrary-app',
     credentials: {

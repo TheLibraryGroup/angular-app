@@ -11,7 +11,7 @@ export function initializer(keycloak: KeycloakService): () => Promise<any> {
             // onLoad: 'login-required',
             checkLoginIframe: false
           },
-          // enableBearerInterceptor: true,
+          enableBearerInterceptor: true,
           bearerExcludedUrls: []
         });
         resolve();

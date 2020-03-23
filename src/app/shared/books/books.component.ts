@@ -14,7 +14,7 @@ export class BooksComponent implements OnInit {
 
   book: Book;
 
-  constructor(public bookService: BookService, private keycloakService: KeycloakService) { }
+  constructor(public bookService: BookService, public keycloakService: KeycloakService) { }
 
   ngOnInit() {
 

@@ -34,10 +34,10 @@ const keycloakService = new KeycloakService();
     MatButtonModule
   ],
   providers: [
-    // {
-    //   provide: KeycloakService,
-    //   useValue: keycloakService
-    // },
+    {
+      provide: KeycloakService,
+      useValue: keycloakService
+    },
     { provide: APP_INITIALIZER,
       useFactory: initializer,
       multi: true,
@@ -52,6 +52,7 @@ const keycloakService = new KeycloakService();
   bootstrap: [AppComponent]
 })
 export class AppModule /*implements DoBootstrap*/ {
+
   ngDoBootstrap(appRef: ApplicationRef) {
     keycloakService
       .init({
@@ -60,8 +61,8 @@ export class AppModule /*implements DoBootstrap*/ {
           // onLoad: 'login-required',
           checkLoginIframe: false
         },
-        // enableBearerInterceptor: true,
-        // bearerExcludedUrls: ['/books', 'http://localhost:4200/books']
+        enableBearerInterceptor: true,
+        bearerExcludedUrls: []
       })
       .then(() => {
         console.log('[ngDoBootstrap] bootstrap app');
