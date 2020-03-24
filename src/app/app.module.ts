@@ -17,6 +17,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
 import {TheLibraryGuard} from './the-library-guard';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {AuthConfigModule} from './auth/auth-config.module';
+import {DefaultOAuthInterceptor} from './shared/default-oauth.interceptor';
 
 // const keycloakService = new KeycloakService();
 
@@ -33,12 +34,12 @@ import {AuthConfigModule} from './auth/auth-config.module';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    // OAuthModule.forRoot({
-    //   resourceServer: {
-    //     allowedUrls: ['http://localhost:8081'],
-    //     sendAccessToken: true
-    //   }
-    // }),
+    OAuthModule.forRoot({
+      resourceServer: {
+        allowedUrls: ['http://localhost:4200'],
+        sendAccessToken: true
+      }
+    }),
     AuthConfigModule,
     MatFormFieldModule,
     MatInputModule,
@@ -46,39 +47,13 @@ import {AuthConfigModule} from './auth/auth-config.module';
   ],
   providers: [
     TheLibraryGuard,
-    // {
-    //   provide: KeycloakService,
-    //   useValue: keycloakService
-    // },
-    // { provide: APP_INITIALIZER,
-    //   useFactory: initializer,
-    //   multi: true,
-    //   deps: [KeycloakService]
-    // },
     { provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: DefaultOAuthInterceptor,
       multi: true
     }
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule /*implements DoBootstrap*/ {
-  // ngDoBootstrap(appRef: ApplicationRef) {
-  //   keycloakService
-  //     .init({
-  //       config: environment.keycloak,
-  //       initOptions: {
-  //         // onLoad: 'login-required',
-  //         checkLoginIframe: false
-  //       },
-  //       enableBearerInterceptor: true,
-  //       // bearerExcludedUrls: ['/books', 'http://localhost:4200/books']
-  //     })
-  //     .then(() => {
-  //       console.log('[ngDoBootstrap] bootstrap app');
-  //       appRef.bootstrap(AppComponent);
-  //     })
-  //     .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
-  // }
+export class AppModule {
 }

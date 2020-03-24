@@ -43,7 +43,7 @@ export class AuthConfigService {
           this.oauthService.setupAutomaticSilentRefresh();
           resolveFn();
         } else {
-          this.oauthService.initImplicitFlow();
+          this.oauthService.initLoginFlow();
           rejectFn();
         }
       });

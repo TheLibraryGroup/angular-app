@@ -15,15 +15,15 @@ export const environment = {
   baseUrl: 'http://localhost:8090/api',
   keycloak: {
     // Url of the Identity Provider
-    issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
+    issuer: 'http://localhost:8080/auth/realms/TheLibrary',
 
     // URL of the SPA to redirect the user to after login
     redirectUri: 'http://localhost:4200/',
 
     // The SPA's id.
-    // The SPA is registerd with this id at the auth-serverß
+    // The SPA is registerd with this id at the auth-server
     clientId: 'thelibrary-app',
-
+    dummyClientSecret: '5902eff4-0127-440d-92d5-f0c0682ff4d7',
     responseType: 'code',
     // set the scope for the permissions the client should request
     // The first three are defined by OIDC.
