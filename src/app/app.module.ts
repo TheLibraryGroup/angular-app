@@ -7,7 +7,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {BooksComponent} from './shared/books/books.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
-import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {KeycloakAngularModule, KeycloakBearerInterceptor, KeycloakService} from 'keycloak-angular';
 import {environment} from '../environments/environment';
 import {HttpErrorInterceptor} from './shared/http-error.interceptor';
 import {HeaderComponent} from './shared/header/header.component';
@@ -44,7 +44,7 @@ const keycloakService = new KeycloakService();
       deps: [KeycloakService]
     },
     { provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: KeycloakBearerInterceptor,
       multi: true
     }
   ],
@@ -58,7 +58,7 @@ export class AppModule /*implements DoBootstrap*/ {
       .init({
         config: environment.keycloak,
         initOptions: {
-          // onLoad: 'login-required',
+          onLoad: 'check-sso',
           checkLoginIframe: false
         },
         enableBearerInterceptor: true,

@@ -6,9 +6,10 @@ export const baseUrls = {
 
 export const environment = {
   production: false,
-  authServiceApiUrl: 'https://www.auth.thelibrary.mypoc.online/auth',
+  // authServiceApiUrl: 'https://www.auth.thelibrary.mypoc.online/auth',
   keycloak: {
-    url: 'https://www.auth.thelibrary.mypoc.online/auth',
+    // url: 'https://www.auth.thelibrary.mypoc.online/auth',
+    url: 'http://localhost:8080/auth',
     realm: 'TheLibrary',
     clientId: 'thelibrary-app',
     credentials: {
