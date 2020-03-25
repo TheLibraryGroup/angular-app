@@ -31,7 +31,7 @@ export const authConfig: AuthConfig = {
 
 
 export class OAuthModuleConfig {
-  resourceServer: OAuthResourceServerConfig = {sendAccessToken: false};
+  resourceServer: OAuthResourceServerConfig = {sendAccessToken: true};
 }
 
 export class OAuthResourceServerConfig {

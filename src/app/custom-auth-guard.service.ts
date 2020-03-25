@@ -3,7 +3,7 @@ import {OAuthService} from 'angular-oauth2-oidc';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class TheLibraryGuard implements CanActivate {
+export class CustomAuthGuard implements CanActivate {
 
   constructor(private oauthService: OAuthService, protected router: Router) {
   }
