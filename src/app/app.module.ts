@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {APP_INITIALIZER, ApplicationRef, DoBootstrap, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -8,16 +8,16 @@ import {BooksComponent} from './shared/books/books.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 // import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
-import {environment} from '../environments/environment';
-import {HttpErrorInterceptor} from './shared/http-error.interceptor';
 import {HeaderComponent} from './shared/header/header.component';
 import {SideNavComponent} from './shared/side-nav/side-nav.component';
 // import {initializer} from './app.init';
-import { OAuthModule } from 'angular-oauth2-oidc';
-import {TheLibraryGuard} from './the-library-guard';
+import {OAuthModule} from 'angular-oauth2-oidc';
+import {CustomAuthGuard} from './custom-auth-guard.service';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+// import {AuthConfigModule} from './auth/auth-config.module';
+import {DefaultOAuthInterceptor} from './shared/default-oauth.interceptor';
+import {AuthConfigModule} from './auth/auth-config.module';
 
-// const keycloakService = new KeycloakService();
 
 @NgModule({
   declarations: [
@@ -34,49 +34,24 @@ import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/mate
     ReactiveFormsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['http://localhost:8081'],
+        allowedUrls: ['http://localhost:4200'],
         sendAccessToken: true
       }
     }),
+    AuthConfigModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule
   ],
   providers: [
-    TheLibraryGuard,
-    // {
-    //   provide: KeycloakService,
-    //   useValue: keycloakService
-    // },
-    // { provide: APP_INITIALIZER,
-    //   useFactory: initializer,
-    //   multi: true,
-    //   deps: [KeycloakService]
-    // },
+    CustomAuthGuard,
     { provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorInterceptor,
+      useClass: DefaultOAuthInterceptor,
       multi: true
     }
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule /*implements DoBootstrap*/ {
-  // ngDoBootstrap(appRef: ApplicationRef) {
-  //   keycloakService
-  //     .init({
-  //       config: environment.keycloak,
-  //       initOptions: {
-  //         // onLoad: 'login-required',
-  //         checkLoginIframe: false
-  //       },
-  //       enableBearerInterceptor: true,
-  //       // bearerExcludedUrls: ['/books', 'http://localhost:4200/books']
-  //     })
-  //     .then(() => {
-  //       console.log('[ngDoBootstrap] bootstrap app');
-  //       appRef.bootstrap(AppComponent);
-  //     })
-  //     .catch(error => console.error('[ngDoBootstrap] init Keycloak failed', error));
-  // }
+export class AppModule {
 }

@@ -1,21 +1,50 @@
-export const baseUrls = {
-  // catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
-  catalog: 'http://localhost:8090/api'
-};
+import {urls} from './environment.prod';
+
+// export const urls = {
+//   // catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
+//   book: {
+//     baseurl : 'http://localhost:8081/THELIBRARY-BOOK/api'
+//   }
+// };
+
+
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
   production: false,
-  authServiceApiUrl: 'http://localhost:8080/auth',
+  envName: 'local',
   keycloak: {
-    url: 'http://localhost:8080/auth',
-    // realm: 'thelibrary',
-    // clientId: 'app-thelibrary',
-    realm: 'TheLibrary',
-    clientId: 'thelibrary-app'
+    // Url of the Identity Provider
+    issuer: 'http://localhost:8080/auth/realms/TheLibrary',
+
+    // URL of the SPA to redirect the user to after login
+    redirectUri: 'http://localhost:4200/',
+
+    // The SPA's id.
+    // The SPA is registerd with this id at the auth-server
+    clientId: 'thelibrary-app',
+    dummyClientSecret: '5902eff4-0127-440d-92d5-f0c0682ff4d7',
+    responseType: 'code',
+    // set the scope for the permissions the client should request
+    // The first three are defined by OIDC.
+    scope: 'openid profile email',
+    // Remove the requirement of using Https to simplify the demo
+    // THIS SHOULD NOT BE USED IN PRODUCTION
+    // USE A CERTIFICATE FOR YOUR IDP
+    // IN PRODUCTION
+    requireHttps: false,
+    // at_hash is not present in JWT token
+    showDebugInformation: true,
+    disableAtHashCheck: true
   },
-  baseUrl: {
-    catalog: {
-      getBooks: baseUrls.catalog + '/books'
+  urls: {
+    book: {
+      baseurl : 'http://localhost:8082/THELIBRARY-BOOK/api',
+      getBooks: this.baseUrl + '/books',
+      getBookById: this.baseUrl + '/book',
     }
   }
 };
