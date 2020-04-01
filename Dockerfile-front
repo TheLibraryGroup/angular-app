@@ -19,8 +19,8 @@ RUN npm install -g @angular/cli@8.3.24
 
 # add app
 COPY build/front/. /app
-COPY /etc/letsencrypt/live/jenkins.mypoc.online/fullchain.pem /ssl/fullchain.pem
-COPY /etc/letsencrypt/live/jenkins.mypoc.online/privkey.pem /ssl/privkey.pem
+#COPY /etc/letsencrypt/live/jenkins.mypoc.online/fullchain.pem /ssl/fullchain.pem
+#COPY /etc/letsencrypt/live/jenkins.mypoc.online/privkey.pem /ssl/privkey.pem
 
 # start app
 RUN pwd

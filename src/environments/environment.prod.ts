@@ -1,24 +1,35 @@
 
-export const baseUrls = {
-  catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
-  // catalog: 'http://localhost:8090/api'
-};
-
 export const environment = {
   production: true,
   authServiceApiUrl: 'https://auth.thelibrary.mypoc.online/auth',
   keycloak: {
-    url: 'https://auth.thelibrary.mypoc.online/auth',
-    // realm: 'thelibrary',
-    // clientId: 'app-thelibrary',
-    realm: 'TheLibrary',
+    // Url of the Identity Provider
+    issuer: 'https://auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
+
+    // URL of the SPA to redirect the user to after login
+    redirectUri: 'https://thelibrary.mypoc.online',
+    // The SPA's id.
+    // The SPA is registerd with this id at the auth-server
     clientId: 'thelibrary-app',
-    'ssl-required': 'all',
-    'public-client': true
+    dummyClientSecret: '5902eff4-0127-440d-92d5-f0c0682ff4d7',
+    responseType: 'code',
+    // set the scope for the permissions the client should request
+    // The first three are defined by OIDC.
+    scope: 'openid profile email',
+    // Remove the requirement of using Https to simplify the demo
+    // THIS SHOULD NOT BE USED IN PRODUCTION
+    // USE A CERTIFICATE FOR YOUR IDP
+    // IN PRODUCTION
+    requireHttps: true,
+    // at_hash is not present in JWT token
+    showDebugInformation: true,
+    disableAtHashCheck: true
   },
-  baseUrl: {
-    catalog: {
-      getBooks: baseUrls.catalog + '/books'
+  urls: {
+    book: {
+      baseurl : 'http://localhost:8082/THELIBRARY-BOOK/api',
+      getBooks: this.baseUrl + '/books',
+      getBookById: this.baseUrl + '/book',
     }
   }
 };

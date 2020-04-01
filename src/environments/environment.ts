@@ -1,7 +1,11 @@
-export const baseUrls = {
-  // catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
-  catalog: 'http://localhost:8090/api'
-};
+import {urls} from './environment.prod';
+
+// export const urls = {
+//   // catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
+//   book: {
+//     baseurl : 'http://localhost:8081/THELIBRARY-BOOK/api'
+//   }
+// };
 
 
 // The file contents for the current environment will overwrite these during build.
@@ -12,7 +16,6 @@ export const baseUrls = {
 export const environment = {
   production: false,
   envName: 'local',
-  baseUrl: 'http://localhost:8090/api',
   keycloak: {
     // Url of the Identity Provider
     issuer: 'http://localhost:8080/auth/realms/TheLibrary',
@@ -36,6 +39,13 @@ export const environment = {
     // at_hash is not present in JWT token
     showDebugInformation: true,
     disableAtHashCheck: true
+  },
+  urls: {
+    book: {
+      baseurl : 'http://localhost:8082/THELIBRARY-BOOK/api',
+      getBooks: this.baseUrl + '/books',
+      getBookById: this.baseUrl + '/book',
+    }
   }
 };
 
