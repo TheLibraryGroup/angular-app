@@ -27,7 +27,7 @@ export const environment = {
   },
   urls: {
     book: {
-      baseurl : 'http://localhost:8082/THELIBRARY-BOOK/api',
+      baseurl : 'http://localhost:8010/THELIBRARY-BOOK/api',
       getBooks: this.baseUrl + '/books',
       getBookById: this.baseUrl + '/book',
     }
