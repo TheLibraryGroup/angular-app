@@ -13,12 +13,12 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
-COPY build/angular-app/package.json /app/package.json
+#COPY angular-app/package.json /app/package.json
 RUN npm install
 RUN npm install -g @angular/cli@8.3.24
 
 # add app
-COPY build/angular-app/. /app
+COPY angular-app/. /app
 #COPY /etc/letsencrypt/live/jenkins.mypoc.online/fullchain.pem /ssl/fullchain.pem
 #COPY /etc/letsencrypt/live/jenkins.mypoc.online/privkey.pem /ssl/privkey.pem
 
