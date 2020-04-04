@@ -1,7 +1,7 @@
 
 export const urls = {
   book: {
-    baseUrl : 'http://51.178.48.191:8010/THELIBRARY-BOOK/api'
+    baseUrl : 'https://thelibrary.gateway.mypoc.online/BOOK-SERVICE/api'
   }
 };
 
