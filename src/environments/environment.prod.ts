@@ -1,4 +1,10 @@
 
+export const urls = {
+  book: {
+    baseUrl : 'http://localhost:8010/THELIBRARY-BOOK/api'
+  }
+};
+
 export const environment = {
   production: true,
   authServiceApiUrl: 'https://auth.thelibrary.mypoc.online/auth',
@@ -27,9 +33,8 @@ export const environment = {
   },
   urls: {
     book: {
-      baseurl : 'http://localhost:8010/THELIBRARY-BOOK/api',
-      getBooks: this.baseUrl + '/books',
-      getBookById: this.baseUrl + '/book',
+      getBooks: urls.book.baseUrl + '/books',
+      getBookById: urls.book.baseUrl + '/book',
     }
   }
 };

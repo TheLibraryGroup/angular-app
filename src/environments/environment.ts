@@ -1,11 +1,9 @@
-import {urls} from './environment.prod';
 
-// export const urls = {
-//   // catalog: 'https://thelibrary.ms.catalog.mypoc.online/api'
-//   book: {
-//     baseurl : 'http://localhost:8081/THELIBRARY-BOOK/api'
-//   }
-// };
+export const urls = {
+  book: {
+    baseUrl : 'http://localhost:8081/THELIBRARY-BOOK/api'
+  }
+};
 
 
 // The file contents for the current environment will overwrite these during build.
@@ -42,9 +40,8 @@ export const environment = {
   },
   urls: {
     book: {
-      baseurl : 'http://localhost:8082/THELIBRARY-BOOK/api',
-      getBooks: this.baseUrl + '/books',
-      getBookById: this.baseUrl + '/book',
+      getBooks: urls.book.baseUrl + '/books',
+      getBookById: urls.book.baseUrl + '/book',
     }
   }
 };
