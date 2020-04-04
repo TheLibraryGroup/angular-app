@@ -29,4 +29,5 @@ RUN ls
 
 #CMD ng serve --ssl=true --ssl-cert "/ssl/fullchain.pem" --ssl-key "/ssl/privkey.pem"
 #CMD ng serve --disable-host-check --configuration=production --proxy-config proxy.conf.json --host 0.0.0.0 --public-host https://www.thelibrary.mypoc.online
-CMD ng serve --disable-host-check --configuration=production --host 0.0.0.0 --public-host https://www.thelibrary.mypoc.online
+#CMD ng serve --disable-host-check --configuration=production --host 0.0.0.0 --public-host https://www.thelibrary.mypoc.online
+CMD ng serve --disable-host-check --host 0.0.0.0 --public-host https://www.thelibrary.mypoc.online
