@@ -10,7 +10,7 @@ export const environment = {
   authServiceApiUrl: 'https://auth.thelibrary.mypoc.online/auth',
   keycloak: {
     // Url of the Identity Provider
-    issuer: 'https://auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
+    issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
 
     // URL of the SPA to redirect the user to after login
     redirectUri: 'https://thelibrary.mypoc.online',
