@@ -28,7 +28,8 @@ export const environment = {
     issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
 
     // URL of the SPA to redirect the user to after login
-    redirectUri: 'http://localhost:4200/',
+    // redirectUri: 'http://localhost:4200/',
+    redirectUri: window.location.origin,
 
     // The SPA's id.
     // The SPA is registerd with this id at the auth-server
