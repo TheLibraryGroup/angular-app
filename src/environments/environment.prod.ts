@@ -1,7 +1,15 @@
 
-export const urls = {
+
+export const baseUrl = {
+  gateway : 'https://thelibrary.gateway.mypoc.online'
+};
+
+export const serviceUrls = {
   book: {
-    baseUrl : 'https://thelibrary.gateway.mypoc.online/BOOK-SERVICE/api'
+    baseUrl : baseUrl.gateway + '/BOOK/api'
+  },
+  loan: {
+    baseUrl : baseUrl.gateway +  '/LOAN/api'
   }
 };
 
@@ -31,10 +39,10 @@ export const environment = {
     showDebugInformation: true,
     disableAtHashCheck: true
   },
-  urls: {
+  endpointUrl: {
     book: {
-      getBooks: urls.book.baseUrl + '/books',
-      getBookById: urls.book.baseUrl + '/book',
+      getBooks: serviceUrls.book.baseUrl + '/books',
+      getBookById: serviceUrls.book.baseUrl + '/book',
     }
   }
 };

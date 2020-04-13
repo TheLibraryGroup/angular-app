@@ -15,7 +15,7 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 import {CustomAuthGuard} from './custom-auth-guard.service';
 import {MatButtonModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 // import {AuthConfigModule} from './auth/auth-config.module';
-import {DefaultOAuthInterceptor} from './shared/default-oauth.interceptor';
+import {OauthInterceptor} from './shared/oauth.interceptor';
 import {AuthConfigModule} from './auth/auth-config.module';
 
 
@@ -34,7 +34,9 @@ import {AuthConfigModule} from './auth/auth-config.module';
     ReactiveFormsModule,
     OAuthModule.forRoot({
       resourceServer: {
-        allowedUrls: ['http://localhost:4200'],
+        // allowedUrls: ['http://localhost:4200'],
+        allowedUrls: [window.location.origin],
+        // allowedUrls: [globalThis.location.origin],
         sendAccessToken: true
       }
     }),
@@ -45,8 +47,9 @@ import {AuthConfigModule} from './auth/auth-config.module';
   ],
   providers: [
     CustomAuthGuard,
-    { provide: HTTP_INTERCEPTORS,
-      useClass: DefaultOAuthInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: OauthInterceptor,
       multi: true
     }
   ],

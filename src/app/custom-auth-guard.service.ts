@@ -1,4 +1,4 @@
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {Injectable} from '@angular/core';
 
@@ -12,7 +12,7 @@ export class CustomAuthGuard implements CanActivate {
     const hasIdToken = this.oauthService.hasValidIdToken();
     const hasAccessToken = this.oauthService.hasValidAccessToken();
 
-    if (this.oauthService.hasValidAccessToken()) {
+    if (hasAccessToken) {
       return (hasIdToken && hasAccessToken);
     }
 
@@ -30,3 +30,4 @@ export class CustomAuthGuard implements CanActivate {
   //   return this.oauthService.loadDiscoveryDocumentAndLogin();
   // }
 }
+

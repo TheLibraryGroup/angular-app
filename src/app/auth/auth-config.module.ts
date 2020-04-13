@@ -1,6 +1,6 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { OAuthModule, AuthConfig } from 'angular-oauth2-oidc';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {AuthConfig, OAuthModule} from 'angular-oauth2-oidc';
 
 import {AuthConfigService} from './auth-config.service';
 import {authConfig, OAuthModuleConfig} from './auth-config';

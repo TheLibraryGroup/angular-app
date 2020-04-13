@@ -1,14 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BooksComponent} from './shared/books/books.component';
-// import {AppAuthGuard} from './app-auth.guard';
 import {CustomAuthGuard} from './custom-auth-guard.service';
 
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    canActivate: [CustomAuthGuard],
-    data: { roles: ['admin'] }
+    // canActivate: [CustomAuthGuard],
+    // data: { roles: ['admin', 'user'] }
   },
   {
     path: 'search',
@@ -26,10 +25,10 @@ const routes: Routes = [
     // canActivate: [AppAuthGuard],
     // data: { roles: ['user'] }
   },
-  {
-    path: '', redirectTo: '/books',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '', redirectTo: '/books',
+  //   pathMatch: 'full'
+  // },
   // {
   //   path: '**',
   //   redirectTo: '/'

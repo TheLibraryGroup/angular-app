@@ -27,6 +27,8 @@ export class AuthConfigService {
       // setup oauthService
       this.oauthService.configure(this.authConfig);
       this.oauthService.setStorage(localStorage);
+
+
       this.oauthService.tokenValidationHandler = new NullValidationHandler();
 
       // subscribe to token events
