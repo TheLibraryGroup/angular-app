@@ -15,12 +15,12 @@ export function init_app(authConfigService: AuthConfigService) {
     AuthConfigService,
     { provide: AuthConfig, useValue: authConfig },
     OAuthModuleConfig,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: init_app,
-      deps: [ AuthConfigService ],
-      multi: true
-    }
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: init_app,
+    //   deps: [ AuthConfigService ],
+    //   multi: true
+    // }
   ]
 })
 export class AuthConfigModule { }

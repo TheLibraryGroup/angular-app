@@ -6,8 +6,8 @@ import {CustomAuthGuard} from './custom-auth-guard.service';
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    // canActivate: [CustomAuthGuard],
-    // data: { roles: ['admin', 'user'] }
+    canActivate: [CustomAuthGuard],
+    data: { roles: ['admin', 'user'] }
   },
   {
     path: 'search',
