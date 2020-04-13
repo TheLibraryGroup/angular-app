@@ -1,18 +1,15 @@
-
-
 export const baseUrl = {
-  gateway : 'http://localhost:8010'
+  gateway: 'http://localhost:8010',
 };
 
 export const serviceUrls = {
   book: {
-    baseUrl : baseUrl.gateway + '/BOOK/api'
+    baseUrl: baseUrl.gateway + '/BOOK/api',
   },
   loan: {
-    baseUrl : baseUrl.gateway +  '/LOAN/api'
-  }
+    baseUrl: baseUrl.gateway + '/LOAN/api',
+  },
 };
-
 
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
@@ -28,7 +25,7 @@ export const environment = {
     issuer: 'https://www.auth.thelibrary.mypoc.online/auth/realms/TheLibrary',
 
     // URL of the SPA to redirect the user to after login
-    redirectUri: 'http://localhost:4200/',
+    redirectUri: 'http://localhost:4200/books',
 
     // The SPA's id.
     // The SPA is registerd with this id at the auth-server
@@ -45,14 +42,14 @@ export const environment = {
     requireHttps: false,
     // at_hash is not present in JWT token
     showDebugInformation: true,
-    disableAtHashCheck: true
+    disableAtHashCheck: true,
   },
   endpointUrl: {
     book: {
       getBooks: serviceUrls.book.baseUrl + '/books',
       getBookById: serviceUrls.book.baseUrl + '/book',
-    }
-  }
+    },
+  },
 };
 
 /*

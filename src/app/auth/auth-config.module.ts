@@ -1,13 +1,11 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
-import {AuthConfig, OAuthModule} from 'angular-oauth2-oidc';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthConfig, OAuthModule } from 'angular-oauth2-oidc';
 
-import {AuthConfigService} from './auth-config.service';
-import {authConfig, OAuthModuleConfig} from './auth-config';
+import { AuthConfigService } from './auth-config.service';
+import { authConfig, OAuthModuleConfig } from './auth-config';
 
-export function init_app(authConfigService: AuthConfigService) {
-    return () => authConfigService.initAuth();
-}
+export const init_app = (authConfigService: AuthConfigService) => authConfigService.initAuth();
 
 @NgModule({
   imports: [ HttpClientModule, OAuthModule.forRoot() ],
@@ -21,6 +19,6 @@ export function init_app(authConfigService: AuthConfigService) {
     //   deps: [ AuthConfigService ],
     //   multi: true
     // }
-  ]
+  ],
 })
-export class AuthConfigModule { }
+export class AuthConfigModule {}

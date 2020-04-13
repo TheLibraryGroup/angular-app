@@ -1,12 +1,11 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {OAuthService} from 'angular-oauth2-oidc';
-import {Injectable} from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { Injectable } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class CustomAuthGuard implements CanActivate {
-
-  constructor(private oauthService: OAuthService, protected router: Router) {
-  }
+  constructor(private oauthService: OAuthService, protected router: Router) {}
 
   // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
   //   const hasIdToken = this.oauthService.hasValidIdToken();
@@ -31,10 +30,17 @@ export class CustomAuthGuard implements CanActivate {
   // }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-
     const hasIdToken = this.oauthService.hasValidIdToken();
     const hasAccessToken = this.oauthService.hasValidAccessToken();
-
+    const decoded = jwt_decode(this.oauthService.getAccessToken());
+    const { roles } = decoded.realm_access;
+    // const userHaveAccess = () => {
+    //   const array = route.data.roles.map((value) => {
+    //     const include: boolean = roles.includes(value);
+    //     return include;
+    //   });
+    //   return array.include('true');
+    // };
     return new Promise(async (resolve, reject) => {
       if (!this.oauthService.hasValidAccessToken()) {
         this.oauthService.loadDiscoveryDocumentAndLogin();
@@ -48,18 +54,16 @@ export class CustomAuthGuard implements CanActivate {
         granted = true;
       } else {
         for (const requiredRole of requiredRoles) {
-          if (this.oauthService.getIdentityClaims()/*.indexOf(requiredRole) > -1*/) {
+          if (this.oauthService.getIdentityClaims() /*.indexOf(requiredRole) > -1*/) {
             granted = true;
             break;
           }
         }
       }
       if (granted === false) {
-        this.router.navigate(['/']);
+        this.router.navigate([ '/' ]);
       }
       resolve(granted);
     });
   }
-
 }
-
