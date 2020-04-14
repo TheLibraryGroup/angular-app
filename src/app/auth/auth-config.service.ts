@@ -36,7 +36,7 @@ export class AuthConfigService {
 
       // continue initializing app or redirect to login-page
 
-      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(isLoggedIn => {
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then( isLoggedIn => {
         if (isLoggedIn) {
           this.oauthService.setupAutomaticSilentRefresh();
           resolveFn();
