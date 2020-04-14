@@ -21,7 +21,7 @@ export class AuthConfigService {
     return new Promise((resolveFn, rejectFn) => {
       // setup oauthService
       this.oauthService.configure(this.authConfig);
-      this.oauthService.setStorage(localStorage);
+      this.oauthService.setStorage(window.localStorage);
 
       this.oauthService.tokenValidationHandler = new NullValidationHandler();
 
@@ -36,7 +36,7 @@ export class AuthConfigService {
 
       // continue initializing app or redirect to login-page
 
-      this.oauthService.loadDiscoveryDocumentAndLogin().then((isLoggedIn) => {
+      this.oauthService.loadDiscoveryDocumentAndTryLogin().then(isLoggedIn => {
         if (isLoggedIn) {
           this.oauthService.setupAutomaticSilentRefresh();
           resolveFn();

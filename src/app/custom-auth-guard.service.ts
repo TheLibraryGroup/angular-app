@@ -2,38 +2,25 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Injectable } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
+import {JwtHelperService} from './shared/jwt-helper.service';
+import {AuthConfigService} from './auth/auth-config.service';
 
 @Injectable()
 export class CustomAuthGuard implements CanActivate {
-  constructor(private oauthService: OAuthService, protected router: Router) {}
+  constructor(private oauthService: OAuthService,
+              protected router: Router,
+              private jwtHelper: JwtHelperService,
+              private oauthConfig: AuthConfigService) {}
 
-  // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
-  //   const hasIdToken = this.oauthService.hasValidIdToken();
-  //   const hasAccessToken = this.oauthService.hasValidAccessToken();
-  //
-  //   if (hasAccessToken) {
-  //     return (hasIdToken && hasAccessToken);
-  //   }
-  //
-  //   this.router.navigate([this.router.url]);
-  //   return this.oauthService.loadDiscoveryDocumentAndLogin();
-  // }
 
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot) {
-  //
-  //   const hasIdToken = this.oauthService.hasValidIdToken();
-  //   const hasAccessToken = this.oauthService.hasValidAccessToken();
-  //
-  //   return this.oauthService.loadDiscoveryDocumentAndLogin();
-  // }
-
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  canActivate(route: ActivatedRouteSnapshot,
+              state: RouterStateSnapshot): Promise<boolean> {
     const hasIdToken = this.oauthService.hasValidIdToken();
     const hasAccessToken = this.oauthService.hasValidAccessToken();
-    const decoded = jwt_decode(this.oauthService.getAccessToken());
-    const { roles } = decoded.realm_access;
+
+    // console.log(jwt_decode(this.oauthService.getAccessToken()));
+    // const decoded = jwt_decode(this.oauthService.getAccessToken(), { header: true });
+    // const { roles } = decoded.realm_access;
     // const userHaveAccess = () => {
     //   const array = route.data.roles.map((value) => {
     //     const include: boolean = roles.includes(value);
@@ -41,10 +28,20 @@ export class CustomAuthGuard implements CanActivate {
     //   });
     //   return array.include('true');
     // };
+
     return new Promise(async (resolve, reject) => {
+
       if (!this.oauthService.hasValidAccessToken()) {
-        this.oauthService.loadDiscoveryDocumentAndLogin();
-        return;
+        this.oauthService.loadDiscoveryDocumentAndLogin().then(() => {
+          resolve(this.canActivate(route, state));
+          }
+        ).catch(reject);
+      }
+      if (this.oauthService.getAccessToken()) {
+        console.log('**************************************');
+        console.log(this.jwtHelper.decodeToken(this.oauthService.getAccessToken()));
+        console.log(this.jwtHelper.getRealmRoles());
+        console.log('**************************************');
       }
       console.log('role restriction given at app-routing.module for this route', route.data.roles);
       // console.log('User roles coming after login from keycloak :', this.roles);
@@ -54,7 +51,7 @@ export class CustomAuthGuard implements CanActivate {
         granted = true;
       } else {
         for (const requiredRole of requiredRoles) {
-          if (this.oauthService.getIdentityClaims() /*.indexOf(requiredRole) > -1*/) {
+          if (this.jwtHelper.getRealmRoles().indexOf(requiredRole) > -1) {
             granted = true;
             break;
           }
