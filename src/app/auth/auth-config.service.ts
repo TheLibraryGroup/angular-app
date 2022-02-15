@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class AuthConfigService {
+
   private decodedAccessToken: any;
   private decodedIDToken: any;
 

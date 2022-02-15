@@ -4,10 +4,12 @@ import { AuthConfig, OAuthModule } from 'angular-oauth2-oidc';
 
 import { AuthConfigService } from './auth-config.service';
 import { authConfig, OAuthModuleConfig } from './auth-config';
+import {AuthInitializer} from '../auth-initializer';
 
 export function init_app(authConfigService: AuthConfigService) {
     return () => authConfigService.initAuth();
 }
+
 
 @NgModule({
   imports: [
@@ -15,15 +17,25 @@ export function init_app(authConfigService: AuthConfigService) {
     OAuthModule.forRoot()
   ],
   providers: [
-    AuthConfigService,
-    { provide: AuthConfig, useValue: authConfig },
-    OAuthModuleConfig,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: init_app,
-      deps: [ AuthConfigService ],
-      multi: true
-    }
+    // AuthConfigService,
+    // {
+    //   provide: AuthConfig,
+    //   useValue: authConfig
+    // },
+    // OAuthModuleConfig,
+    // AuthInitializer,
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: init_auth,
+    //   deps: [AuthInitializer],
+    //   multi: true,
+    // },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: init_app,
+    //   deps: [ AuthConfigService ],
+    //   multi: true
+    // }
   ],
 })
 export class AuthConfigModule {}

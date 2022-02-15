@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BooksComponent} from './shared/books/books.component';
-import {CustomAuthGuard} from './custom-auth-guard.service';
+import {CustomGuard} from './custom.guard';
 
 const routes: Routes = [
   {
     path: 'books', component: BooksComponent,
-    canActivate: [CustomAuthGuard],
-    data: { roles: ['admin', 'user'] }
+    canActivate: [CustomGuard],
+    data: { verification: { type: 'SOME_ROLES', roles: ['user'] } },
   },
   {
     path: 'search',
@@ -22,8 +22,8 @@ const routes: Routes = [
   {
     path: 'loan',
     loadChildren: () => import('./loan/loan.module').then(mod => mod.LoanModule),
-    // canActivate: [AppAuthGuard],
-    // data: { roles: ['user'] }
+    canActivate: [CustomGuard],
+    data: { verification: { type: 'SOME_ROLES', roles: ['admin'] } },
   },
   // {
   //   path: '', redirectTo: '/books',

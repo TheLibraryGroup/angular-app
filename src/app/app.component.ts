@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   title = 'TheLibrary-Angular';
 
-  constructor(private oauthService: OAuthService) {
+  constructor(private oauthService: OAuthService/*, authInitializer: AuthInitializer*/) {
     // console.log(environment.production); // Logs false for default environment
   }
 
